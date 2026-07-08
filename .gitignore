@@ -15,6 +15,12 @@ notes/
 skills/
 logs/
 
+# your personal goals (the shipped template is goals/goals.example.md)
+goals/goals.md
+
+# local Claude Code settings
+.claude/settings.local.json
+
 # OS junk
 .DS_Store
 Thumbs.db

@@ -13,8 +13,10 @@ form, a few questions at a time):
 - 1–3 skills or ambitions they want to get better at beyond classes
 - How they want the AI to talk to them (gentle vs. drill-sergeant)
 
-Write the answers to `memory/profile.md`. Seed `goals/goals.md` from their
-ambitions if it's still the empty template.
+Write the answers to `memory/profile.md`. If `goals/goals.md` doesn't exist
+yet, create it by copying `goals/goals.example.md` (it's gitignored, so their
+real goals never get pushed). Then seed it from their ambitions if it's still
+the empty template.
 
 ## Part 2: Your semester
 

@@ -15,7 +15,7 @@ them ahead of their semester with zero fluff.
 
 - `school/raw/` is where the user drops syllabus PDFs (or any course docs).
 - `school/` is generated: `semester-overview.md` (master calendar) + one file per class.
-- `goals/goals.md` holds the user's goals for the semester (GPA targets, skills, projects).
+- `goals/goals.md` holds the user's goals for the semester (GPA targets, skills, projects). It's gitignored; `/setup` creates it from `goals/goals.example.md`.
 - `memory/profile.md` is who the user is and how they want to be talked to. Built by `/setup`, updated by `/capture`.
 - `notes/` holds anything the user captures: class notes, ideas, thoughts. Filed by `/capture`.
 - `skills/` holds skill tracks created by `/level`: a Lv1→Lv10 path per skill, daily reps feed `/quest`.
