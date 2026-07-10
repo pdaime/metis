@@ -153,6 +153,26 @@
   ol.steps li span{color:var(--muted);font-size:14px}
   ol.steps code{font-family:ui-monospace,monospace;color:#fff;background:#161616;border:1px solid var(--border);border-radius:6px;padding:1px 7px;font-size:13px}
 
+  /* ---------- mini terminals in steps ---------- */
+  .term-mini{background:var(--panel);border:1px solid var(--border);border-radius:12px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12.5px;padding:14px 16px;margin-top:14px;box-shadow:0 20px 60px rgba(0,0,0,.6);text-align:left}
+  .term-mini .bar{display:flex;gap:6px;margin-bottom:10px}
+  .term-mini .bar i{width:8px;height:8px;border-radius:50%;background:#1f1f1f;display:inline-block}
+  .term-mini p{margin:2px 0;white-space:pre-wrap;color:#cfcfcf;line-height:1.55}
+  .term-mini .dim{color:#4e4e4e}
+  .term-mini .wt{color:#fff;font-weight:600}
+  .term-mini .caret{display:inline-block;width:7px;height:13px;background:#fff;vertical-align:-2px;animation:blink 1s steps(1) infinite}
+  #npxterm{min-height:118px}
+  .dropzone{border:1px dashed var(--border2);border-radius:12px;padding:14px 16px;margin-top:14px;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+  .dropzone .fchip{font-family:ui-monospace,monospace;font-size:12px;color:var(--text);background:#0f0f0f;border:1px solid var(--border);border-radius:8px;padding:5px 12px}
+  .dropzone .fdest{font-family:ui-monospace,monospace;font-size:12px;color:var(--dim);margin-left:auto}
+
+  /* ---------- npx copy pill ---------- */
+  .npx-row{display:flex;justify-content:center;margin-top:14px}
+  .npx-pill{display:inline-flex;align-items:center;gap:12px;border:1px solid var(--border2);background:rgba(10,10,10,.85);backdrop-filter:blur(8px);border-radius:999px;padding:8px 8px 8px 20px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:14px;color:var(--text);cursor:pointer;transition:border-color .2s}
+  .npx-pill:hover{border-color:#fff}
+  .npx-pill .dlr{color:var(--dim)}
+  .npx-pill em{font-style:normal;background:#fff;color:#000;border-radius:999px;padding:5px 14px;font-size:12px;font-weight:600;font-family:"Space Grotesk",sans-serif;min-width:64px;text-align:center}
+
   /* ---------- roadmap ---------- */
   .road{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin-top:52px}
   .rcard{border:1px dashed var(--border2);border-radius:var(--radius);padding:26px;background:transparent}
@@ -242,6 +262,9 @@
       <a href="#" id="dl2" class="btn solid" data-goatcounter-click="download-hero">Get Nūs free</a>
       <a href="#" id="gh2" class="btn ghost" data-goatcounter-click="github-hero">View on GitHub</a>
     </div>
+    <div class="npx-row hi" style="transition-delay:.45s">
+      <button class="npx-pill" type="button" data-npx data-goatcounter-click="npx-copy-hero" aria-label="Copy the install command npx create-nus"><span class="dlr">$</span>&nbsp;npx create-nus<em>copy</em></button>
+    </div>
     <form class="capture hero-cap hi" style="transition-delay:.5s">
       <input type="email" placeholder="you@school.edu" autocomplete="email" aria-label="Email for the hosted-app waitlist">
       <button type="submit">Join the waitlist</button>
@@ -316,12 +339,24 @@
     <div>
       <p class="sec-kicker rv">The ritual</p>
       <h2 class="rv d1">Running in 10 minutes.</h2>
-      <p class="lede rv d2">No build steps, no config, no account. A folder and four moves.</p>
+      <p class="lede rv d2">No build steps, no config, no account. One command and three moves.</p>
       <ol class="steps">
-        <li class="rv" data-gl="Α"><b>Install Claude Code</b><span>Free download from Anthropic. Needs a Claude subscription (the same ~$20/mo you may already spend on a chatbot).</span></li>
-        <li class="rv d1" data-gl="Β"><b>Download Nūs &amp; unzip</b><span>One folder. That folder <em>is</em> the product. Every file it writes is plain text you can read.</span></li>
-        <li class="rv d2" data-gl="Γ"><b>Drop your syllabi in <code>school/raw/</code></b><span>PDFs straight from Canvas or your prof's email.</span></li>
-        <li class="rv d3" data-gl="Δ"><b>Run <code>/setup</code></b><span>Watch it build your whole semester. Tomorrow morning: <code>/brief</code>.</span></li>
+        <li class="rv" data-gl="Α"><b>Install Claude Code</b><span>Free download from Anthropic. Needs a Claude subscription (the same ~$20/mo you may already spend on a chatbot).</span>
+          <div class="term-mini" aria-hidden="true"><div class="bar"><i></i><i></i><i></i></div><p><span class="dim">$ </span>npm install -g @anthropic-ai/claude-code
+<span class="wt">✓</span> claude is ready</p></div>
+        </li>
+        <li class="rv d1" data-gl="Β"><b>Run <code>npx create-nus</code></b><span>One command scaffolds the whole kit. That folder <em>is</em> the product. Every file it writes is plain text you can read.</span>
+          <div class="term-mini" id="npxterm"><div class="bar"><i></i><i></i><i></i></div><div id="npxlines"></div></div>
+        </li>
+        <li class="rv d2" data-gl="Γ"><b>Drop your syllabi in <code>school/raw/</code></b><span>PDFs straight from Canvas or your prof's email.</span>
+          <div class="dropzone" aria-hidden="true"><span class="fchip">calc-ii-syllabus.pdf</span><span class="fchip">chem-101.pdf</span><span class="fchip">econ-201.pdf</span><span class="fdest">→ school/raw/</span></div>
+        </li>
+        <li class="rv d3" data-gl="Δ"><b>Run <code>claude</code>, type <code>/setup</code></b><span>Watch it build your whole semester. Tomorrow morning: <code>/brief</code>.</span>
+          <div class="term-mini" aria-hidden="true"><div class="bar"><i></i><i></i><i></i></div><p><span class="dim">$ </span>claude
+<span class="dim">&gt; </span><span class="wt">/setup</span>
+Reading 4 syllabi… <span class="wt">✓</span>
+Every deadline mapped. Worst week flagged: <span class="wt">Oct 13–19</span>.</p></div>
+        </li>
       </ol>
     </div>
     <div class="nous-ghost rv d2" aria-hidden="true">
@@ -374,6 +409,9 @@
     <a href="#" id="dl3" class="btn solid" data-goatcounter-click="download-final">Get Nūs free</a>
     <a href="#" id="gh3" class="btn ghost" data-goatcounter-click="github-final">View on GitHub</a>
   </div>
+  <div class="npx-row rv d3">
+    <button class="npx-pill" type="button" data-npx data-goatcounter-click="npx-copy-final" aria-label="Copy the install command npx create-nus"><span class="dlr">$</span>&nbsp;npx create-nus<em>copy</em></button>
+  </div>
   <form class="capture rv d4">
     <input type="email" placeholder="you@school.edu" autocomplete="email" aria-label="Email for the hosted-app waitlist">
     <button type="submit">Join the waitlist</button>
@@ -381,7 +419,7 @@
 </section>
 
 <footer>
-  Nūs · free &amp; open source · <a href="#" id="gh4">GitHub</a> · <a href="https://tally.so/r/44qgKO" id="wl2">Waitlist</a>
+  Nūs · free &amp; open source · <a href="#" id="gh4">GitHub</a> · <a href="https://tally.so/r/44qgKO" id="wl2">Waitlist</a> · <a href="privacy.html">Privacy</a>
   <p class="credit">Statue: <em>Marble head of an athlete</em>, The Met Open Access (CC0).</p>
 </footer>
 
@@ -535,6 +573,70 @@
       });
     }, {threshold: 0.4});
     tio.observe(document.getElementById("term"));
+  }
+
+  /* ---- npx copy pills ---- */
+  document.querySelectorAll("[data-npx]").forEach(function(btn){
+    var tag = btn.querySelector("em");
+    btn.addEventListener("click", function(){
+      function done(){
+        tag.textContent = "copied ✓";
+        setTimeout(function(){ tag.textContent = "copy"; }, 1600);
+      }
+      if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText("npx create-nus").then(done, done);
+      else done();
+    });
+  });
+
+  /* ---- npx terminal typing (setup steps) ---- */
+  var NPX_LINES = [
+    ['dim','$ '], ['wt','npx create-nus'], ['','\n\n'],
+    ['','  N Ū S — your semester brain is scaffolded.\n'],
+    ['','  12 files created '], ['wt','✓'], ['','\n'],
+    ['dim','  → '], ['','cd nus']
+  ];
+  var npxBox = document.getElementById("npxlines");
+  function renderNpxInstant(){
+    npxBox.innerHTML = "";
+    var p = document.createElement("p");
+    NPX_LINES.forEach(function(seg){
+      var sp = document.createElement("span");
+      if (seg[0]) sp.className = seg[0];
+      sp.textContent = seg[1];
+      p.appendChild(sp);
+    });
+    npxBox.appendChild(p);
+  }
+  if (npxBox) {
+    if (reduced) { renderNpxInstant(); }
+    else {
+      var npxTyped = false;
+      var nio = new IntersectionObserver(function(entries){
+        entries.forEach(function(en){
+          if (!en.isIntersecting || npxTyped) return;
+          npxTyped = true; nio.disconnect();
+          var p = document.createElement("p");
+          npxBox.appendChild(p);
+          var caret = document.createElement("span");
+          caret.className = "caret";
+          p.appendChild(caret);
+          var li = 0, ci = 0, cur = null;
+          (function tick(){
+            if (li >= NPX_LINES.length) { return; }
+            if (!cur) {
+              cur = document.createElement("span");
+              if (NPX_LINES[li][0]) cur.className = NPX_LINES[li][0];
+              p.insertBefore(cur, caret);
+            }
+            var text = NPX_LINES[li][1];
+            cur.textContent = text.slice(0, ++ci);
+            if (ci >= text.length) { li++; ci = 0; cur = null; }
+            setTimeout(tick, 18);
+          })();
+        });
+      }, {threshold: 0.5});
+      nio.observe(document.getElementById("npxterm"));
+    }
   }
 
   /* ---- marquee: duplicate track for seamless loop ---- */
